@@ -344,6 +344,77 @@
 
   <!-- main visual/particles script -->
   <script src="{{ asset('js/main.js') }}"></script>
+  
+  <!-- Razorpay Checkout script -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script>
+    async function startRazorpayCheckout(payload) {
+      const res = await fetch('/razorpay/create-order', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').content
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (!res.ok) {
+        const text = await res.text();
+        console.error('Create order failed:', text);
+        alert('Unable to start payment. Please try again.');
+        return;
+      }
+
+      const data = await res.json();
+
+      const options = {
+        key: data.key,
+        amount: data.amount,
+        currency: 'INR',
+        name: 'GOFX',
+        description: data.course,
+        order_id: data.order_id,
+        prefill: {
+          name: data.name,
+          email: data.email,
+          contact: data.phone
+        },
+        modal: {
+          ondismiss: function () {
+            console.warn('Payment popup closed by user');
+            // optional UX
+            alert('Payment was not completed.');
+          }
+        },
+        handler: function (response) {
+          const form = document.createElement('form');
+          form.method = 'POST';
+          form.action = '/razorpay/verify';
+
+          ['razorpay_payment_id', 'razorpay_order_id', 'razorpay_signature'].forEach(k => {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = k;
+            input.value = response[k];
+            form.appendChild(input);
+          });
+
+          const csrf = document.createElement('input');
+          csrf.type = 'hidden';
+          csrf.name = '_token';
+          csrf.value = document.querySelector('meta[name=csrf-token]').content;
+          form.appendChild(csrf);
+
+          document.body.appendChild(form);
+          form.submit();
+        }
+      };
+
+      new Razorpay(options).open();
+    }
+
+  </script>
+
   @stack('scripts')
 </body>
 </html>

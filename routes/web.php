@@ -10,6 +10,7 @@ use App\Http\Controllers\GuidesController;
 use App\Http\Controllers\StrategiesController;
 use App\Http\Controllers\ToolsController;
 use App\Http\Controllers\LibraryController;
+use App\Http\Controllers\RazorpayCheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -115,3 +116,14 @@ use App\Http\Controllers\CommunityController;
 Route::get('/community/whatsapp-room', [CommunityController::class,'whatsappRoom'])->name('community.whatsapp');
 Route::get('/community/prime', [CommunityController::class,'prime'])->name('community.prime');
 Route::get('/community/success-wall', [CommunityController::class,'successWall'])->name('community.success');
+
+// Razorpay Checkout
+Route::post('/razorpay/create-order', [RazorpayCheckoutController::class, 'createOrder'])
+    ->name('razorpay.create-order');
+
+Route::post('/razorpay/verify', [RazorpayCheckoutController::class, 'verify'])
+    ->name('razorpay.verify');
+
+Route::get('/checkout/thank-you', function () {
+    return view('checkout.thankyou');
+})->name('checkout.thankyou');
