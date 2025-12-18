@@ -1,0 +1,110 @@
+/* ----- Glass Neon Card (global/neon.css) ----- */
+
+/* ultra smooth neon flow */
+@keyframes neon-gradient-flow {
+  0% {
+    background-position: 0% 50%;
+    filter: blur(40px);
+  }
+  50% {
+    background-position: 100% 50%;
+    filter: blur(55px);
+  }
+  100% {
+    background-position: 0% 50%;
+    filter: blur(40px);
+  }
+}
+
+/* GOLD VERSION */
+.glass-neon-golden {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.001));
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    box-shadow: 0 10px 40px rgba(27, 29, 34, 0.7);
+    backdrop-filter: blur(10px) saturate(1.08);
+    position: relative;
+    overflow: visible;
+    z-index: 1;
+}
+
+.glass-neon-golden::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  padding: 3px;
+
+  background: linear-gradient(
+    90deg,
+    rgba(247, 148, 26, 0.45),
+    rgba(255, 209, 102, 0.25),
+    rgba(247, 148, 26, 0.45),
+    rgba(255, 209, 102, 0.20),
+    rgba(247, 148, 26, 0.45)
+  );
+
+  background-size: 400% 400%;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+
+  filter: blur(45px);
+  pointer-events: none;
+
+  /* GPU optimization */
+  will-change: background-position, filter;
+  transform: translateZ(0);
+
+  /* smoother timing */
+  animation: neon-gradient-flow 6s ease-in-out infinite;
+
+  /* ensure glow sits behind content */
+  z-index: -1;
+}
+
+/* BLUE VERSION */
+.glass-neon-blue {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.001));
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    box-shadow: 0 10px 40px rgba(27, 29, 34, 0.7);
+    backdrop-filter: blur(10px) saturate(1.08);
+    position: relative;
+    overflow: visible;
+    z-index: 1;
+}
+
+.glass-neon-blue::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  padding: 3px;
+
+  /* Smooth dark-blue neon gradient */
+  background: linear-gradient(
+    90deg,
+    rgba(0, 130, 255, 0.45),
+    rgba(0, 200, 255, 0.25),
+    rgba(0, 130, 255, 0.45),
+    rgba(0, 200, 255, 0.20),
+    rgba(0, 130, 255, 0.45)
+  );
+
+  background-size: 400% 400%;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+
+  filter: blur(45px);
+  pointer-events: none;
+
+  /* Extremely smooth flow */
+  animation: neon-gradient-flow 6s ease-in-out infinite;
+
+  /* GPU optimization */
+  will-change: background-position, filter;
+  transform: translateZ(0);
+
+  /* ensure glow sits behind content */
+  z-index: -1;
+}

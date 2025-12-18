@@ -1,0 +1,21 @@
+/* Master Stylesheet – Imports all CSS partials */
+
+/* GLOBAL */
+@import url('partials/global/variables.css');
+@import url('partials/global/base.css');
+@import url('partials/global/utilities.css');
+@import url('partials/global/neon.css');
+
+/* HOME PAGE */
+@import url('partials/home-page/hero.css');
+
+/* ABOUT US PAGE */
+@import url('partials/about-page/about.css');
+
+/* Additional sections can be added later:
+@import url('partials/home-page/instructor.css');
+@import url('partials/home-page/what-you-will-learn.css');
+@import url('partials/home-page/highlights.css');
+@import url('partials/home-page/popular-courses.css');
+@import url('partials/home-page/final-cta.css');
+*/
