@@ -16,6 +16,7 @@ class CoursesController extends Controller
         'intraday-swing'           => 'courses.intraday-swing-trading',
         // 'advanced-psychology'      => 'courses.advanced-trading-psychology',
         'smart-money-concepts'      => 'courses.smart-money-concepts',
+        'test'                      => 'courses.test',
     ];
 
     /**
@@ -44,10 +45,11 @@ class CoursesController extends Controller
      * @param  string  $slug
      * @return \Illuminate\View\View|\Illuminate\Http\Response
      */
-    public function show(string $slug)
+    public function show(string $slug, int $price = 1)
     {
         // Normalize slug
         $slug = trim($slug);
+        $price = (int)$price;
 
         if (! array_key_exists($slug, $this->courses)) {
             abort(404);
@@ -61,7 +63,7 @@ class CoursesController extends Controller
             'title' => $this->titleFromSlug($slug),
         ];
 
-        return view($view, compact('meta'));
+        return view($view, compact('meta', 'price'));
     }
 
     /**

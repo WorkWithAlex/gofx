@@ -13,7 +13,7 @@
 
         <div class="mt-6 flex gap-3">
           <!-- Pay Now button that opens modal -->
-          <button data-open-enroll="price-action-market-structure" class="inline-block px-6 py-3 font-semibold rounded-md" style="background:linear-gradient(90deg,var(--accent2),var(--accent1)); color:#000;">
+          <button data-open-enroll="price-action" class="inline-block px-6 py-3 font-semibold rounded-md" style="background:linear-gradient(90deg,var(--accent2),var(--accent1)); color:#000;">
             Pay Now to Enroll
           </button>
           <a href="#curriculum" class="inline-block px-6 py-3 rounded-md border border-white/10 text-slate-200">
@@ -97,7 +97,7 @@
         <p class="text-slate-300">Reserve a seat now — live cohorts are limited.</p>
       </div>
       <div>
-        <button data-open-enroll="price-action-market-structure" class="inline-block px-6 py-3 font-semibold rounded-md" style="background:linear-gradient(90deg,var(--accent2),var(--accent1)); color:#000;">
+        <button data-open-enroll="price-action" class="inline-block px-6 py-3 font-semibold rounded-md" style="background:linear-gradient(90deg,var(--accent2),var(--accent1)); color:#000;">
           Pay Now to Enroll
         </button>
       </div>
@@ -107,4 +107,4 @@
 </section>
 @endsection
 
-@include('partials.checkout.enroll-modal', ['course' => 'price-action-market-structure'])
+@include('partials.checkout.enroll-modal', ['course' => 'price-action'])

@@ -2,10 +2,11 @@
     $passed = $course ?? ($meta['slug'] ?? 'forex-mastery');
     $slugMap = [
       'forex-mastery' => 'forex-mastery',
-      'price-action-market-structure' => 'price-action',
-      'intraday-swing-trading' => 'intraday-swing',
+      'price-action' => 'price-action',
+      'intraday-swing' => 'intraday-swing',
       // 'advanced-trading-psychology' => 'advanced-psychology',
       'smart-money-concepts' => 'smart-money-concepts',
+      'test'=>'test',
     ];
     $courseSlug = $slugMap[$passed] ?? $passed;
     $modalId = 'enrollModal_' . $courseSlug;
@@ -42,6 +43,7 @@
       </div>
       
       <input type="hidden" name="currency" value="INR">
+      <input type="hidden" name="test_price" value="{{ $price ?? 1 }}">
 
       <div class="flex gap-3 mt-4">
         <button type="submit" class="flex-1 px-4 py-2 rounded" style="background:linear-gradient(90deg,var(--accent2),var(--accent1));color:#000">
@@ -71,6 +73,8 @@
         email: form.querySelector('[name="email"]').value,
         phone: form.querySelector('[name="phone"]').value,
         course: form.querySelector('[name="course"]').value,
+        currency: form.querySelector('[name="currency"]').value,
+        test_price: form.querySelector('[name="test_price"]').value,
       };
 
       if (typeof startRazorpayCheckout !== 'function') {

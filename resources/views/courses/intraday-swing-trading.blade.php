@@ -12,7 +12,7 @@
         <p class="mt-4 text-slate-300 max-w-xl">Learn separate, proven workflows for intraday scalping and multi-day swing trades — trade frequency, management, and edge.</p>
 
         <div class="mt-6 flex gap-3">
-          <button data-open-enroll="intraday-swing-trading" class="inline-block px-6 py-3 font-semibold rounded-md" style="background:linear-gradient(90deg,var(--accent2),var(--accent1)); color:#000;">
+          <button data-open-enroll="intraday-swing" class="inline-block px-6 py-3 font-semibold rounded-md" style="background:linear-gradient(90deg,var(--accent2),var(--accent1)); color:#000;">
             Pay Now to Enroll
           </button>
           <a href="#curriculum" class="inline-block px-6 py-3 rounded-md border border-white/10 text-slate-200">
@@ -90,7 +90,7 @@
         <p class="text-slate-300">One course, two practical workflows. Reserve your seat now.</p>
       </div>
       <div>
-          <button data-open-enroll="intraday-swing-trading" class="inline-block px-6 py-3 font-semibold rounded-md" style="background:linear-gradient(90deg,var(--accent2),var(--accent1)); color:#000;">
+          <button data-open-enroll="intraday-swing" class="inline-block px-6 py-3 font-semibold rounded-md" style="background:linear-gradient(90deg,var(--accent2),var(--accent1)); color:#000;">
             Pay Now to Enroll
           </button>
       </div>
@@ -100,4 +100,4 @@
 </section>
 @endsection
 
-@include('partials.checkout.enroll-modal', ['course' => 'intraday-swing-trading'])
+@include('partials.checkout.enroll-modal', ['course' => 'intraday-swing'])

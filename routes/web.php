@@ -46,6 +46,11 @@ Route::get('/courses/{slug}', [CoursesController::class, 'show'])
     ->where('slug', '[a-z0-9\-]+')
     ->name('courses.show');
 
+Route::get('/courses/{slug}/{price}', [CoursesController::class, 'show'])
+    ->where('slug', '[a-z0-9\-]+')
+    ->where('price', '[0-9]+')
+    ->name('courses.show');
+
 /*
 |--------------------------------------------------------------------------
 | Checkout + Payments (PayU)
@@ -125,5 +130,12 @@ Route::post('/razorpay/verify', [RazorpayCheckoutController::class, 'verify'])
     ->name('razorpay.verify');
 
 Route::get('/checkout/thank-you', function () {
-    return view('checkout.thankyou');
+    $receipt = session()->pull('checkout.receipt');
+    $receipt_url = session()->pull('checkout.receipt_url');
+
+    if (!($receipt && $receipt_url)) {
+        abort(404);
+    }
+
+    return view('checkout.thankyou', compact('receipt', 'receipt_url'));
 })->name('checkout.thankyou');

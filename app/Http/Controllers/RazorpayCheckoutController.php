@@ -42,6 +42,7 @@ class RazorpayCheckoutController extends Controller
             'intraday-swing' => 36000,
             // 'advanced-psychology' => 45000,
             'smart-money-concepts' => 25500,
+            'test' => $request->has('test_price') ? (int)$request->test_price : 1,
         ];
 
         $slug = $request->course;
@@ -124,12 +125,20 @@ class RazorpayCheckoutController extends Controller
             'amount' => $session['amount'],
             'course' => $this->titleFromSlug($session['course']),
             'gateway' => 'Razorpay',
+            'status'  => 'success',
             'date' => now()->toDateTimeString(),
         ];
 
         $pdf = PDF::loadView('checkout.receipt_pdf', $receiptData);
         $pdfPath = "public/receipts/{$request->razorpay_payment_id}.pdf";
-        Storage::put($pdfPath, $pdf->output());
+        Storage::disk('public')->put(
+            "receipts/{$request->razorpay_payment_id}.pdf",
+            $pdf->output()
+        );
+
+        $receiptUrl = asset(
+            'storage/receipts/' . $request->razorpay_payment_id . '.pdf'
+        );
 
         try {
             Mail::to($session['email'])->send(
@@ -143,6 +152,8 @@ class RazorpayCheckoutController extends Controller
         }
 
         session()->forget('razorpay.checkout.' . $request->razorpay_order_id);
+        session()->put('checkout.receipt', $receiptData);
+        session()->put('checkout.receipt_url', $receiptUrl);
 
         $this->log('Razorpay payment success', $receiptData);
 
